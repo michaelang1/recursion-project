@@ -50,6 +50,13 @@ function deepDup(arr) {
 
 	// return deepDup(arr.slice(0, 1)).concat(deepDup(arr.slice(1)));
 	return [deepDup(arr[0]), ...deepDup(arr.slice(1))];
+	// slice() creates a pair of extra brackets around
+	// the sliced off array, and then spread is to
+	// remove them when the sliced off array goes through
+	// the function and gets split in two again.
+
+	// An array always gets split, only a value won't be split.
+	// If the sliced off array is []. Spread will just remove it!
 }
 
 // method 2: using map method
