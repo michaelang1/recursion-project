@@ -30,7 +30,7 @@ const subsets = (array, sets = [[]]) => {
 // function subsets(array) {
 // 	let length = array.length;
 
-// 	if (array.length === 0) {
+// 	if (length === 0) {
 // 		return [[]];
 // 	}
 // 	let lastSets = subsets(array.slice(0, length - 1));
