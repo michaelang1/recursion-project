@@ -12,13 +12,21 @@ iceCreamShop(['moose tracks'], 'moose tracks'); // true
 iceCreamShop([], 'honey lavender'); // false
 ***********************************************************************/
 
-
 // your code here
+const iceCreamShop = (flavors, favorite, i = 0) => {
+	if (i < flavors.length) {
+		if (iceCreamShop(flavors, favorite, i + 1)) {
+			return true;
+		}
 
+		return flavors[i] === favorite;
+	}
+	return false;
+};
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = iceCreamShop;
+	module.exports = iceCreamShop;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

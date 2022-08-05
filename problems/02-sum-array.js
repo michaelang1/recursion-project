@@ -11,10 +11,16 @@ sumArray([1, 2, 3, 4, 5]); // 15
 ***********************************************************************/
 
 // your code here
-  
+const sumArray = (nums, i = 0) => {
+	if (i < nums.length) {
+		return nums[i] + sumArray(nums, i + 1);
+	}
+	return 0;
+};
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = sumArray;
+	module.exports = sumArray;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

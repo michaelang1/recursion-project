@@ -53,19 +53,91 @@ solution so that it only calculates and compares all of the different
 combinations.
 ***********************************************************************/
 
-function greedyMakeChange(target, coins = [25, 10, 5, 1]) {
-  // no tests for greedyMakeChange so make sure to test this on your own
-  // your code here
+function greedyMakeChange(target, coins = [25, 10, 5, 1], change = []) {
+	// no tests for greedyMakeChange so make sure to test this on your own
+	if ((coins.length === 1) & (target % coins[0] !== 0)) {
+		return null;
+	}
+
+	if (coins.length === 0) {
+		return change;
+	}
+
+	if (target >= coins[0]) {
+		let remainder = target - coins[0];
+		change.push(coins[0]);
+		return greedyMakeChange(remainder, coins, change);
+	} else {
+		return greedyMakeChange(target, coins.slice(1), change);
+	}
 }
 
 function makeBetterChange(target, coins = [25, 10, 5, 1]) {
-  // your code here
+	let options = [];
+
+	for (let i = 0; i < coins.length; i++) {
+		let coin = coins[i];
+		let maxTimes = (target - (target % coin)) / coin;
+		let coinsReorder = [coin, ...coins.slice(0, i), ...coins.slice(i + 1)];
+		for (let time = 1; time <= maxTimes; time++) {
+			let option = makeChange(target, coinsReorder, coin, time);
+			if (option != null) {
+				options.push(option);
+			}
+		}
+	}
+
+	if (options.length === 0) {
+		return null;
+	} else {
+		let bestOption = options.reduce((accum, el) =>
+			accum.length <= el.length ? accum : el
+		);
+		return bestOption;
+	}
 }
 
+function makeChange(target, coins, coin, time, checker = 0, change = []) {
+	if ((coins.length === 1) & (target % coins[0] !== 0)) {
+		return null;
+	}
+
+	if (coins.length === 0) {
+		return change;
+	}
+
+	if (target >= coins[0] && coins[0] === coin) {
+		if (checker < time) {
+			let remainder = target - coin;
+			change.push(coin);
+			checker++;
+			return makeChange(remainder, coins, coin, time, checker, change);
+		} else {
+			return makeChange(
+				target,
+				coins.slice(1),
+				coin,
+				time,
+				checker,
+				change
+			);
+		}
+	}
+
+	if (target >= coins[0] && coins[0] !== coin) {
+		let remainder = target - coins[0];
+		change.push(coins[0]);
+		return makeChange(remainder, coins, coin, time, checker, change);
+	}
+
+	if (target < coins[0]) {
+		return makeChange(target, coins.slice(1), coin, time, checker, change);
+	}
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = makeBetterChange
+	module.exports = makeBetterChange;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

@@ -13,10 +13,21 @@ addToTwelve([1]); // false
 ***********************************************************************/
 
 // your code here
+const addToTwelve = (nums, i = 0) => {
+	debugger;
+	if (i < nums.length) {
+		if (addToTwelve(nums, i + 1)) {
+			return true;
+		}
+
+		return nums[i] + nums[i + 1] === 12;
+	}
+	return false;
+};
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = addToTwelve;
+	module.exports = addToTwelve;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

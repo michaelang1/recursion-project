@@ -20,11 +20,22 @@ fibonacci(10); // 55
 ***********************************************************************/
 
 // your code here
-  
+function fibonacci(n) {
+	if (n === 0) {
+		return 0;
+	} else if (n === 1) {
+		return 1;
+	} else if (n > 1) {
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	} else {
+		console.log('n must be a positive integer');
+		return null;
+	}
+}
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = fibonacci;
+	module.exports = fibonacci;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }
-  

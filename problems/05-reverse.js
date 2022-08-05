@@ -13,10 +13,16 @@ reverse(""); // ""
 ***********************************************************************/
 
 // your code here
+const reverse = ([...string]) => {
+	if (string.length === 0) {
+		return '';
+	}
+	return [...reverse(string.slice(1)), string[0]].join('');
+};
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = reverse;
+	module.exports = reverse;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

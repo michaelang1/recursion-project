@@ -63,15 +63,44 @@ The call above should return the tree below:
 
 ***********************************************************************/
 
-const makeTree = (categories, parent) => {
-  // your code here
+const makeTree = (categories, root) => {
+	// your code here
+	let tree = {};
+	for (let obj of categories) {
+		if (obj.parent === root) {
+			tree[obj.id] = makeTree(categories, obj.id);
+		}
+	}
+	return tree;
 };
+
+const categories1 = [
+	{ id: 'animals', parent: null },
+	{ id: 'mammals', parent: 'animals' },
+];
+
+const tree1 = makeTree(categories1, null);
+console.log(JSON.stringify(tree1, null, 2));
+
+const categories2 = [
+	{ id: 'animals', parent: null },
+	{ id: 'mammals', parent: 'animals' },
+	{ id: 'cats', parent: 'mammals' },
+	{ id: 'dogs', parent: 'mammals' },
+	{ id: 'chihuahua', parent: 'dogs' },
+	{ id: 'labrador', parent: 'dogs' },
+	{ id: 'persian', parent: 'cats' },
+	{ id: 'siamese', parent: 'cats' },
+];
+
+const tree2 = makeTree(categories2, null);
+console.log(JSON.stringify(tree2, null, 2));
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = makeTree;
+	module.exports = makeTree;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }
 
 // This problem was inspired by a Fun Fun Function video:

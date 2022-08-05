@@ -11,10 +11,19 @@ isSorted([5, 4, 3, 2, 1]); // false
 ***********************************************************************/
 
 // your code here
+function isSorted(nums, i = 0) {
+	if (i < nums.length - 1) {
+		if (isSorted(nums, i + 1)) {
+			return nums[i] <= nums[i + 1];
+		}
+		return false;
+	}
+	return true;
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = isSorted;
+	module.exports = isSorted;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

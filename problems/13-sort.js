@@ -22,12 +22,29 @@ sort([]); // []
 ***********************************************************************/
 
 function sort(nums, sorted = []) {
-  // your code here
+	// your code here
+	if (nums.length === 0) {
+		return sorted;
+	}
+
+	let minIndex = 0;
+	let min = nums[0];
+
+	for (let i = 0; i < nums.length; i++) {
+		if (nums[i] < min) {
+			min = nums[i];
+			minIndex = i;
+		}
+	}
+
+	sorted.push(min);
+	nums.splice(minIndex, 1);
+	return sort(nums, sorted);
 }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = sort;
+	module.exports = sort;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

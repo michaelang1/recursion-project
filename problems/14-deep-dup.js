@@ -14,7 +14,7 @@ since we used 'slice' in the example above that 'slice' creates a shallow copy, 
 correct. For this problem we duplicate our original array so that our function returns a new
 array with different memory adresses.
 
-Write a function, deepDup(arr), that deeply duplicates a given array. Your duplicated array, 
+Write a function, deepDup(arr), that deeply duplicates a given array. Your duplicated array,
 when compared to various indexes of the original array, should evaluate to false like below.
 
 
@@ -36,11 +36,35 @@ console.log(x[0] === y[0]) // true
 
 ***********************************************************************/
 
-// your code here
+// method 1: use slice and spread
+function deepDup(arr) {
+	if (arr.length === 0) {
+		return [];
+	}
+
+	// the following line "washes" each 1st element to a new number
+	// after pealing all of the [] get to the value.
+	if (!Array.isArray(arr)) {
+		return arr;
+	}
+
+	// return deepDup(arr.slice(0, 1)).concat(deepDup(arr.slice(1)));
+	return [deepDup(arr[0]), ...deepDup(arr.slice(1))];
+}
+
+// method 2: using map method
+// function deepDup(arr) {
+// 	return arr.map(el => {
+// 		if (!Array.isArray(el)) {
+// 			return el;
+// 		}
+// 		return deepDup(el);
+// 	});
+// }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = deepDup;
+	module.exports = deepDup;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }

@@ -39,15 +39,24 @@ be recursively calling `advancedExponent`. Find a way to visually see how many
 times `advancedExponent` is being recursively called.
 ***********************************************************************/
 
-
 function advancedExponent(b, n) {
-  // your code here
+	// console.log(`n = ${n}`);
+	if (n === 0) {
+		return 1;
+	} else if (n % 2 !== 0) {
+		return (
+			b *
+			advancedExponent(b, (n - 1) / 2) *
+			advancedExponent(b, (n - 1) / 2)
+		);
+	} else if (n % 2 === 0) {
+		return advancedExponent(b, n / 2) * advancedExponent(b, n / 2);
+	}
 }
-
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
-  module.exports = advancedExponent;
+	module.exports = advancedExponent;
 } catch (e) {
-  module.exports = null;
+	module.exports = null;
 }
